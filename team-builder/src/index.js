@@ -8,7 +8,7 @@ import './index.css'
 import './reset.css'
 
 //Import components
-import App from './App'
+import App from './components/App'
 
 
 //Render app to DOM

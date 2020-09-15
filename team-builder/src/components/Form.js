@@ -1,14 +1,16 @@
 import React from 'react'
 
 export default function Form(props) {
- 
+  const { formValues, updateForm, submitForm } = props
 
-  const onChange = evt => {
-    
+  const onChange = event => {
+    const { name, value } = event.target
+    updateForm(name, value)
   }
 
-  const onSubmit = evt => {
-    
+  const onSubmit = event => {
+    event.preventDefault()
+    submitForm()
   }
 
   return (
@@ -19,7 +21,7 @@ export default function Form(props) {
               type='text'
               name='name'
               onChange={onChange}
-              value=''
+              value={formValues.name}
               placeholder='name'
               maxLength='30'
               />
@@ -30,7 +32,7 @@ export default function Form(props) {
             type='email'
             name='email'
             onChange={onChange}
-            value=''
+            value={formValues.email}
             placeholder='email'
             maxLength='30'
           />
@@ -39,7 +41,7 @@ export default function Form(props) {
         <label>Role
           <select
             name='role'
-            value=''
+            value={formValues.role}
             onChange={onChange}>
               <option value='select role'>-- select role --</option>
               <option value='Front End Engineer'>Front End Engineer</option>

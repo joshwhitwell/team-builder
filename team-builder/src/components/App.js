@@ -15,8 +15,8 @@ export default function App() {
   const [teamMembers, setTeamMembers] = useState([])
   const [formValues, setFormValues] = useState(initialFormValues)
 
-  const updateForm = (inputName, inputValue) => {
-    setFormValues({...formValues, [inputName]: inputValue})
+  const updateForm = (key, value) => {
+    setFormValues({...formValues, [key]: value})
   }
 
   const submitForm = () => {
@@ -25,7 +25,7 @@ export default function App() {
       email: formValues.email.trim(),
       role: formValues.role
     }
-    setTeamMembers({...teamMembers, newMember})
+    setTeamMembers([...teamMembers, newMember])
     setFormValues(initialFormValues)
   }
 

@@ -10,8 +10,7 @@ import './reset.css'
 //Import components
 import App from './components/App'
 
-
-//Render app to DOM
+//Render App to DOM
 ReactDOM.render(
   <React.StrictMode>
     <App />

@@ -1,59 +1,69 @@
+//Import dependencies
 import React from 'react'
 
+//Form component
 export default function Form(props) {
-  const { formValues, updateForm, submitForm } = props
+    //Deconstruct props
+    const { formValues, updateForm, submitForm } = props
 
-  const onChange = event => {
-    const { name, value } = event.target
-    updateForm(name, value)
-  }
+    //Input tags onChange helper
+    const onChange = event => {
+        //Deconstructs input name and value from event object
+        const { name, value } = event.target
+        //Invokes updateForm helper with name and value
+        updateForm(name, value)
+    }
 
-  const onSubmit = event => {
-    event.preventDefault()
-    submitForm()
-  }
+    //Form tag onSubmit helper
+    const onSubmit = event => {
+        //Prevents page reload
+        event.preventDefault()
+        //Invokes submitForm helper
+        submitForm()
+    }
 
-  return (
-    <form className='container' onSubmit={onSubmit}>
-      <div>
-        <label>Name
-              <input 
-              type='text'
-              name='name'
-              onChange={onChange}
-              value={formValues.name}
-              placeholder='name'
-              maxLength='30'
-              />
-        </label>
+    //Return Form
+    return (
+        <form className='container' onSubmit={onSubmit}>
+            <div>
+                <label>Name
+                    <input
+                        type='text'
+                        name='name'
+                        onChange={onChange}
+                        value={formValues.name}
+                        placeholder='name'
+                        maxLength='30'
+                    />
+                </label>
 
-        <label>Email
-          <input
-            type='email'
-            name='email'
-            onChange={onChange}
-            value={formValues.email}
-            placeholder='email'
-            maxLength='30'
-          />
-        </label>
+                <label>Email
+                    <input
+                        type='email'
+                        name='email'
+                        onChange={onChange}
+                        value={formValues.email}
+                        placeholder='email'
+                        maxLength='30'
+                    />
+                </label>
 
-        <label>Role
-          <select
-            name='role'
-            value={formValues.role}
-            onChange={onChange}>
-              <option value='select role'>-- select role --</option>
-              <option value='Front End Engineer'>Front End Engineer</option>
-              <option value='Back End Engineer'>Back End Engineer</option>
-              <option value='Project Manager'>Project Manager</option>
-          </select>
-        </label>
+                <label>Role
+                    <select
+                        name='role'
+                        value={formValues.role}
+                        onChange={onChange}>
+                        <option value='select role'>-- select role --</option>
+                        <option value='Front End Engineer'>Front End Engineer</option>
+                        <option value='Back End Engineer'>Back End Engineer</option>
+                        <option value='Project Manager'>Project Manager</option>
+                    </select>
+                </label>
 
-        <div className='submit'>
-          <button>submit</button>
-        </div>
-      </div>
-    </form>
-  )
+                <div className='submit'>
+                    <button>Submit</button>
+                </div>
+            </div>
+        </form>
+    )
 }

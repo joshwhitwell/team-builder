@@ -5,6 +5,7 @@ import React from 'react'
 export default function TeamMember(props) {
     //Deconstruct props
     const { name, email, role } = props.info
+    const { editMember } = props
 
     //Return TeamMember
     return (
@@ -12,6 +13,7 @@ export default function TeamMember(props) {
             <h2>{name}</h2>
             <p>Email: {email}</p>
             <p>Role: {role}</p>
+            <button onClick={(event) => {editMember(props.info)}}>edit</button>
         </div>
     )
 }

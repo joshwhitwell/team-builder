@@ -1,5 +1,5 @@
 //Import dependencies
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 //Import components
 import Form from './Form'
@@ -17,6 +17,7 @@ export default function App() {
   //Initialize state
   const [teamMembers, setTeamMembers] = useState([])
   const [formValues, setFormValues] = useState(initialFormValues)
+  const [ memberToEdit, setMemberToEdit ] = useState({})
 
   //Form update helper--invoked in Form.js
   const updateForm = (key, value) => {
@@ -37,6 +38,15 @@ export default function App() {
     setFormValues(initialFormValues)
   }
 
+  //Member Editer Helper
+  const editMember = (memberInfo) => {
+    setMemberToEdit(memberInfo)
+  }
+
+  useEffect(() => {
+    setFormValues(memberToEdit)
+  }, [memberToEdit])
+
   //Return App
   return (
     <div className='container'>
@@ -50,7 +60,11 @@ export default function App() {
 
       {
         teamMembers.map((member, index) => 
-          <TeamMember key={index} info={member}/>
+          <TeamMember 
+          key={index} 
+          info={member}
+          editMember={editMember}
+          />
         )
       }
     </div>

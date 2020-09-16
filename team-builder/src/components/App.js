@@ -31,7 +31,7 @@ export default function App() {
       name: formValues.name.trim(),
       email: formValues.email.trim(),
       role: formValues.role,
-      id: Math.floor(Math.random() * 1000) + 1
+      id: Math.floor(Math.random() * 10000) + 1
     }
     //Updates teamMembers state with newMember
     setTeamMembers([...teamMembers, newMember])
@@ -45,15 +45,14 @@ export default function App() {
   }
   
   const memberEditer = () => {
-    let teamCopy = [...teamMembers]
-    let updatedMember = {
+    setTeamMembers([...teamMembers].map(member => 
+      memberToEdit.id === member.id ?
+      {
       name: formValues.name.trim(),
       email: formValues.email.trim(),
       role: formValues.role,
-    }
-    setTeamMembers(teamCopy.map(member => 
-      memberToEdit.id === member.id ?
-      updatedMember
+      id: memberToEdit.id
+      }
       : member
     ))
     setFormValues(initialFormValues)

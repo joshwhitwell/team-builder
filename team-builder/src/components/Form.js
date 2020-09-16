@@ -1,10 +1,10 @@
 //Import dependencies
-import React from 'react'
+import React, { useEffect } from 'react'
 
 //Form component
 export default function Form(props) {
     //Deconstruct props
-    const { formValues, updateForm, submitForm } = props
+    const { formValues, updateForm, submitForm, memberToEdit, memberEditer } = props
 
     //Input tags onChange helper
     const onChange = event => {
@@ -16,10 +16,15 @@ export default function Form(props) {
 
     //Form tag onSubmit helper
     const onSubmit = event => {
-        //Prevents page reload
-        event.preventDefault()
-        //Invokes submitForm helper
-        submitForm()
+        if (memberToEdit.name) {
+            event.preventDefault()
+            memberEditer()
+        } else {
+            //Prevents page reload
+            event.preventDefault()
+            //Invokes submitForm helper
+            submitForm()
+        }
     }
 
     //Return Form
@@ -61,7 +66,7 @@ export default function Form(props) {
                 </label>
 
                 <div className='submit'>
-                    <button>Submit</button>
+                    <button disabled={!formValues.email || !formValues.name || !formValues.role}>Submit</button>
                 </div>
             </div>
         </form>

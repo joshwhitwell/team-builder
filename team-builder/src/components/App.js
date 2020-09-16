@@ -9,7 +9,7 @@ import TeamMember from './TeamMember'
 const initialFormValues = {
   name: '',
   email: '',
-  role: ''
+  role: '',
 }
 
 //App component
@@ -17,7 +17,7 @@ export default function App() {
   //Initialize state
   const [teamMembers, setTeamMembers] = useState([])
   const [formValues, setFormValues] = useState(initialFormValues)
-  const [ memberToEdit, setMemberToEdit ] = useState({})
+  const [ memberToEdit, setMemberToEdit ] = useState(initialFormValues)
 
   //Form update helper--invoked in Form.js
   const updateForm = (key, value) => {
@@ -30,7 +30,8 @@ export default function App() {
     const newMember = {
       name: formValues.name.trim(),
       email: formValues.email.trim(),
-      role: formValues.role
+      role: formValues.role,
+      id: Math.floor(Math.random() * 1000) + 1
     }
     //Updates teamMembers state with newMember
     setTeamMembers([...teamMembers, newMember])
@@ -41,6 +42,21 @@ export default function App() {
   //Member Editer Helper
   const editMember = (memberInfo) => {
     setMemberToEdit(memberInfo)
+  }
+  
+  const memberEditer = () => {
+    let teamCopy = [...teamMembers]
+    let updatedMember = {
+      name: formValues.name.trim(),
+      email: formValues.email.trim(),
+      role: formValues.role,
+    }
+    setTeamMembers(teamCopy.map(member => 
+      memberToEdit.id === member.id ?
+      updatedMember
+      : member
+    ))
+    setFormValues(initialFormValues)
   }
 
   useEffect(() => {
@@ -56,6 +72,8 @@ export default function App() {
       formValues={formValues}
       updateForm={updateForm}
       submitForm={submitForm}
+      memberToEdit={memberToEdit}
+      memberEditer={memberEditer}
       />
 
       {

@@ -1,5 +1,5 @@
 //Import dependencies
-import React, { useEffect } from 'react'
+import React from 'react'
 
 //Form component
 export default function Form(props) {
@@ -16,7 +16,7 @@ export default function Form(props) {
 
     //Form tag onSubmit helper
     const onSubmit = event => {
-        if (memberToEdit.name) {
+        if (memberToEdit) {
             event.preventDefault()
             memberEditer()
         } else {

@@ -17,7 +17,7 @@ export default function App() {
   //Initialize state
   const [teamMembers, setTeamMembers] = useState([])
   const [formValues, setFormValues] = useState(initialFormValues)
-  const [ memberToEdit, setMemberToEdit ] = useState(initialFormValues)
+  const [ memberToEdit, setMemberToEdit ] = useState(null)
 
   //Form update helper--invoked in Form.js
   const updateForm = (key, value) => {
@@ -41,12 +41,13 @@ export default function App() {
 
   //Member Editer Helper
   const editMember = (memberInfo) => {
-    setMemberToEdit(memberInfo)
+    setMemberToEdit(memberInfo.id)
+    setFormValues(memberInfo)
   }
   
   const memberEditer = () => {
     setTeamMembers([...teamMembers].map(member => 
-      memberToEdit.id === member.id ?
+      memberToEdit === member.id ?
       {
       name: formValues.name.trim(),
       email: formValues.email.trim(),
@@ -56,11 +57,12 @@ export default function App() {
       : member
     ))
     setFormValues(initialFormValues)
+    setMemberToEdit(null)
   }
 
-  useEffect(() => {
-    setFormValues(memberToEdit)
-  }, [memberToEdit])
+  // useEffect(() => {
+  //   setFormValues(memberToEdit)
+  // }, [memberToEdit])
 
   //Return App
   return (
